@@ -96,13 +96,12 @@ server {
 
 {% if cert_source != 'none' %}
 server {
-    listen {{ nginx_https_port }};
+    listen {{ nginx_https_port }} ssl;
     server_name {{ domain_list | join(' ') }};
 
     access_log syslog:server=unix:/dev/log;
     error_log syslog:server=unix:/dev/log;
 
-    ssl on;
     ssl_protocols  TLSv1 TLSv1.1 TLSv1.2;
     ssl_session_cache   shared:SSL:10m;
     ssl_session_timeout  10m;
